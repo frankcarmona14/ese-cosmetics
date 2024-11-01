@@ -306,10 +306,10 @@ export default function ProductActions({
           className="sm:flex-1"
         >
           {!selectedVariant
-            ? "Select variant"
-            : !itemsInStock
-              ? "Out of stock"
-              : "Add to cart"}
+            ? "Seleccione un Color"
+            : !inStock
+              ? "Producto agotado"
+              : "Añadir al carrito"}
         </Button>
       </div>
     </>

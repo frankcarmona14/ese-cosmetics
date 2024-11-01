@@ -119,6 +119,11 @@ module.exports = {
         shine: "shine 1s linear infinite",
       },
     },
+      backgroundColor: {
+        "rose-400": "#fb7185",
+        "rose-450": "rgb(238 94 117)"
+      }
+    }
   },
   safelist: [
     {

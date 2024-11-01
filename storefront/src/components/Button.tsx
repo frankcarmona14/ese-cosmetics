@@ -33,7 +33,7 @@ export const getButtonClassNames = ({
   variant,
 }: ButtonOwnProps): string => {
   return twJoin(
-    "inline-flex items-center focus-visible:outline-none rounded-xs justify-center transition-colors",
+    "inline-flex items-center focus-visible:outline-none rounded-lg justify-center transition-colors",
 
     // isFullWidth
     Boolean(isFullWidth) && "w-full",
@@ -65,7 +65,7 @@ export const getButtonClassNames = ({
     ((variant === "ghost" || variant == "unstyled") && "text-black h-auto") ||
       (variant === "outline" &&
         "text-black hover:text-grayscale-500 hover:border-grayscale-500 border border-black") ||
-      (variant === "solid" && "bg-black hover:bg-grayscale-500 text-white") ||
+      (variant === "solid" && "bg-rose-400 hover:bg-rose-450 text-white") ||
       (variant === "link" &&
         "text-black h-auto border-b border-current px-0 rounded-none")
   )

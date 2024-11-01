@@ -62,7 +62,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 <ImageGallery className="max-md:hidden" images={images} />
               </div>
             )}
-            <div className="sticky flex-1 top-0">
+            <div className="sticky flex-1 flex flex-col justify-center">
               <ProductInfo product={product} />
               <Suspense
                 fallback={

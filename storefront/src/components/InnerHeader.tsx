@@ -21,6 +21,7 @@ import { Icon } from "@/components/Icon"
 import { Layout, LayoutColumn } from "@/components/Layout"
 import { Drawer } from "@/components/Drawer"
 import { LocalizedButtonLink, LocalizedLink } from "@/components/LocalizedLink"
+import Image from "next/image"
 
 export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
   const pathName = usePathname()
@@ -40,11 +41,11 @@ export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
 
     position > 200
       ? elementsToChangeColor.forEach((element) => {
-          element.setAttribute("data-changecolor", "true")
-        })
+        element.setAttribute("data-changecolor", "true")
+      })
       : elementsToChangeColor.forEach((element) => {
-          element.setAttribute("data-changecolor", "false")
-        })
+        element.setAttribute("data-changecolor", "false")
+      })
   }
 
   React.useEffect(() => {
@@ -88,51 +89,38 @@ export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
     >
       <Layout>
         <LayoutColumn>
-          <div className="flex justify-between items-center h-18 md:h-21">
-            <h1 className="font-medium text-md">
-              <LocalizedLink href="/">SofaSocietyCo.</LocalizedLink>
-            </h1>
+          <div className="flex justify-between items-center h-18 md:h-26">
+            <div className="flex">
+              <LocalizedLink href="/">
+              <div className="md:bg-white rounded-full p-1">
+                <Image src="/images/content/logo-ese-cosmetics.png"
+                  width={80}
+                  height={80}
+                  alt="Logo"
+                  quality={100}
+                  className="w-[60] h-[60] md:w-[80] md:h-[80]"
+                />
+              </div>
+              </LocalizedLink>
+            </div>
             <div className="flex items-center gap-8 max-md:hidden">
               <LocalizedLink href="/about">About</LocalizedLink>
               <LocalizedLink href="/inspiration">Inspiration</LocalizedLink>
-              <LocalizedLink href="/store">Shop</LocalizedLink>
+              <LocalizedLink href="/store">Tienda</LocalizedLink>
             </div>
             <div className="flex items-center gap-3 lg:gap-6 max-md:hidden">
-              <Select
-                selectedKey={`${countryCode}`}
-                onSelectionChange={(key) => {
-                  updateRegion(`${key}`, currentPath)
-                }}
-                className="w-16"
-                aria-label="Select country"
+              <LocalizedButtonLink
+                href="/cart"
+                variant="ghost"
+                className={twJoin(
+                  "p-1 data-[changecolor=true]:md:text-black js-bg-change",
+                  isPageWithHeroImage && "md:text-white"
+                )}
+                data-changecolor={false}
               >
-                <UiSelectButton className="bg-transparent border-0 h-auto !gap-0 !p-1 w-full">
-                  <UiSelectValue>
-                    {(item) =>
-                      typeof item.selectedItem === "object" &&
-                      item.selectedItem !== null &&
-                      "country" in item.selectedItem &&
-                      typeof item.selectedItem.country === "string"
-                        ? item.selectedItem.country.toUpperCase()
-                        : item.defaultChildren
-                    }
-                  </UiSelectValue>
-                  <UiSelectIcon className="text-current" />
-                </UiSelectButton>
-                <Popover className="max-w-61 w-full">
-                  <UiSelectListBox>
-                    {countryOptions.map((country) => (
-                      <UiSelectListBoxItem
-                        key={country.country}
-                        id={country.country}
-                        value={country}
-                      >
-                        {country.label}
-                      </UiSelectListBoxItem>
-                    ))}
-                  </UiSelectListBox>
-                </Popover>
-              </Select>
+                <Icon name="case" className="w-6 h-6" />
+              </LocalizedButtonLink>
+              
               {/* <Button
                 variant="ghost"
                 className={twJoin(
@@ -152,18 +140,6 @@ export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
               >
                 <Icon name="user" className="w-6 h-6" />
               </Button> */}
-
-              <LocalizedButtonLink
-                href="/cart"
-                variant="ghost"
-                className={twJoin(
-                  "p-1 data-[changecolor=true]:md:text-black js-bg-change",
-                  isPageWithHeroImage && "md:text-white"
-                )}
-                data-changecolor={false}
-              >
-                <Icon name="case" className="w-6 h-6" />
-              </LocalizedButtonLink>
             </div>
             <div className="flex items-center gap-6 md:hidden">
               <LocalizedButtonLink
@@ -226,7 +202,7 @@ export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
               Inspiration
             </LocalizedLink>
             <LocalizedLink href="/store" onClick={() => setIsMenuOpen(false)}>
-              Shop
+              Tienda
             </LocalizedLink>
           </div>
           <Select
@@ -241,9 +217,9 @@ export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
               <UiSelectValue>
                 {(item) =>
                   typeof item.selectedItem === "object" &&
-                  item.selectedItem !== null &&
-                  "country" in item.selectedItem &&
-                  typeof item.selectedItem.country === "string"
+                    item.selectedItem !== null &&
+                    "country" in item.selectedItem &&
+                    typeof item.selectedItem.country === "string"
                     ? item.selectedItem.country.toUpperCase()
                     : item.defaultChildren
                 }

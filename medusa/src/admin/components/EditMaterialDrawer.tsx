@@ -18,7 +18,7 @@ export const EditMaterialDrawer: React.FC<{
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const updateMaterialMutation = useMutation({
     mutationKey: ['fashion', 'update'],
-    mutationFn: async (values: z.infer<typeof materialFormSchema>) => {
+    mutationFn: async (values: { name: string }) => {
       return fetch(`/admin/fashion/${id}`, {
         method: 'POST',
         body: JSON.stringify(values),
