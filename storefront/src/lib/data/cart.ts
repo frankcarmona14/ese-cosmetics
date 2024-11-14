@@ -10,6 +10,7 @@ import medusaError from "@lib/util/medusa-error"
 import { enrichLineItems } from "@lib/util/enrich-line-items"
 import { getAuthHeaders, getCartId, removeCartId, setCartId } from "./cookies"
 import { getRegion } from "./regions"
+import sendWhatsappMessage from "@lib/util/send-whatsapp-message"
 
 export async function retrieveCart() {
   const cartId = await getCartId()

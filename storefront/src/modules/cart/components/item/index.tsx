@@ -13,7 +13,7 @@ import { NumberField } from "@/components/NumberField"
 import { LocalizedLink } from "@/components/LocalizedLink"
 
 type ItemProps = {
-  item: HttpTypes.StoreCartLineItem
+  item: HttpTypes.StoreCartLineItem | HttpTypes.StoreOrderLineItem
 }
 
 const Item = ({ item }: ItemProps) => {

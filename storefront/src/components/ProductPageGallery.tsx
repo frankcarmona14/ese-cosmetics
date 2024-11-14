@@ -103,21 +103,19 @@ export const ProductPageGallery: React.FC<
           </IconCircle>
         </button>
       </div>
-      <div className="flex justify-center max-lg:w-full max-lg:absolute max-lg:bottom-4">
+      <div className="flex justify-center max-lg:w-full max-lg:absolute max-lg:bottom-1">
         {scrollSnaps.map((_, index) => (
           <button
             key={index}
             onClick={() => onDotButtonClick(index)}
-            className="px-1.5"
+            className="mx-1"
           >
-            <span
+            <IconCircle
               className={twMerge(
-                "border-b border-transparent transition-colors pb-0.5 px-0.5",
-                index === selectedIndex && "border-black"
+                "max-lg:opacity-75 bg-grayscale-300 w-3 h-3 transition-colors border-none",
+                index === selectedIndex && "bg-rose-400"
               )}
-            >
-              {index + 1}
-            </span>
+            />
           </button>
         ))}
       </div>

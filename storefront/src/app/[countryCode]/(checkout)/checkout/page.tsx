@@ -10,6 +10,7 @@ import CheckoutSummary from "@modules/checkout/templates/checkout-summary"
 import { Layout, LayoutColumn } from "@/components/Layout"
 import { LocalizedLink } from "@/components/LocalizedLink"
 import MobileCheckoutSummary from "@modules/checkout/templates/mobile-checkout-summary"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -42,7 +43,13 @@ export default async function Checkout({
         <LayoutColumn>
           <div className="flex justify-between items-center h-18">
             <LocalizedLink href="/" className="text-md font-medium">
-              SofaSocietyCo.
+              <Image src="/images/content/logo-ese-cosmetics.png"
+                width={80}
+                height={80}
+                alt="Logo"
+                quality={100}
+                className="w-[60] h-[60] md:w-[80] md:h-[80]"
+              />
             </LocalizedLink>
             <div>
               <p className="font-semibold">Checkout</p>
@@ -64,7 +71,13 @@ export default async function Checkout({
               href="/"
               className="text-md font-medium mb-16 inline-block max-lg:hidden"
             >
-              SofaSocietyCo.
+              <Image src="/images/content/logo-ese-cosmetics.png"
+                width={80}
+                height={80}
+                alt="Logo"
+                quality={100}
+                className="w-[60] h-[60] md:w-[80] md:h-[80]"
+              />
             </LocalizedLink>
             <Wrapper cart={cart}>
               <CheckoutForm

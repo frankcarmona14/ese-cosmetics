@@ -2,7 +2,7 @@ import Product from "../product-preview"
 import { getRegion } from "@lib/data/regions"
 import { getProductsList } from "@lib/data/products"
 import { HttpTypes } from "@medusajs/types"
-import { Layout, LayoutColumn } from "@/components/Layout"
+import { Carousel } from "@/components/Carousel"
 
 type RelatedProductsProps = {
   product: HttpTypes.StoreProduct
@@ -21,13 +21,13 @@ export default async function RelatedProducts({
 
   // edit this function to define your related products logic
   const queryParams: HttpTypes.StoreProductParams = {
-    limit: 3,
+    limit: 13,
   }
   if (region?.id) {
     queryParams.region_id = region.id
   }
-  if (product.collection_id) {
-    queryParams.collection_id = [product.collection_id]
+  if (product?.categories) {
+    queryParams.category_id = [product.categories[0].id]
   }
   if (product.tags) {
     queryParams.tag_id = product.tags.map((t) => t.value).filter(Boolean)
@@ -49,20 +49,18 @@ export default async function RelatedProducts({
 
   return (
     <>
-      <Layout>
-        <LayoutColumn className="mt-26 md:mt-36">
-          <h4 className="text-lg md:text-2xl mb-8 md:mb-16">
-            Related products
-          </h4>
-        </LayoutColumn>
-      </Layout>
-      <Layout className="gap-y-10 md:gap-y-16">
+      <Carousel
+        heading={<h3 className="text-lg md:text-2xl">Productos relacionados</h3>}
+      >
         {products.map((product) => (
-          <LayoutColumn key={product.id} className="!col-span-6 md:!col-span-4">
+          <div
+            key={product.id}
+            className="w-[70%] sm:w-[60%] lg:w-full max-w-72 flex-shrink-0"
+          >
             <Product region={region} product={product} />
-          </LayoutColumn>
+          </div>
         ))}
-      </Layout>
+      </Carousel>
     </>
   )
 }

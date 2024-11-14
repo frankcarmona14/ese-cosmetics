@@ -62,7 +62,7 @@ const Email = ({
             type="email"
             title="Enter a valid email address."
             autoComplete="email"
-            defaultValue={cart?.email || customer?.email}
+            defaultValue={cart?.email || customer?.email || ""}
             required
             data-testid="shipping-email-input"
             variant="outline"

@@ -277,7 +277,9 @@ const FashionPage = () => {
             data.materials.map((material) => (
               <Table.Row key={material.id}>
                 <Table.Cell>
-                  <Link to={`/fashion/${material.id}`}>{material.name}</Link>
+                  <Link to={`/fashion/${material.id}`}>
+                    {material.name}
+                  </Link>
                 </Table.Cell>
                 <Table.Cell className="text-right">
                   <DropdownMenu>

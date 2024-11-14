@@ -46,11 +46,11 @@ const CheckoutSummary = ({
       <div className="flex justify-between items-center mb-8 lg:mb-16">
         <div>
           <p>
-            Order — {numOfItems} item{numOfItems > 1 ? "s" : ""}
+            {numOfItems} item{numOfItems > 1 ? "s" : ""}
           </p>
         </div>
         <LocalizedButtonLink href="/cart" variant="link">
-          Edit cart
+          Editar carrito
         </LocalizedButtonLink>
       </div>
       {numOfItems > 0 &&
@@ -83,14 +83,14 @@ const CheckoutSummary = ({
                   <ItemPrice item={item} />
                 </div>
                 <div className="flex flex-col max-lg:gap-1.5 max-lg:text-xs">
-                  {item.variant?.title && (
+                  {item.variant?.title && item.variant?.title !== "Default option value" && (
                     <p>
                       Variant:{" "}
                       <span className="ml-1">{item.variant.title}</span>
                     </p>
                   )}
                   <p>
-                    Quantity: <span className="ml-1">{item.quantity}</span>
+                    Cantidad: <span className="ml-1">{item.quantity}</span>
                   </p>
                 </div>
               </div>

@@ -91,7 +91,7 @@ const ShippingAddress = ({
       )} */}
       <div className="grid grid-cols-2 gap-4 mb-8">
         <Input
-          placeholder="First name"
+          placeholder="Nombre"
           name="shipping_address.first_name"
           autoComplete="given-name"
           value={formData["shipping_address.first_name"] || ""}
@@ -101,7 +101,7 @@ const ShippingAddress = ({
           variant="outline"
         />
         <Input
-          placeholder="Last name"
+          placeholder="Apellidos"
           name="shipping_address.last_name"
           autoComplete="family-name"
           value={formData["shipping_address.last_name"] || ""}
@@ -111,36 +111,26 @@ const ShippingAddress = ({
           variant="outline"
         />
         <Input
-          placeholder="Address"
-          name="shipping_address.address_1"
-          autoComplete="address-line1"
-          value={formData["shipping_address.address_1"] || ""}
+          placeholder="Teléfono"
+          name="shipping_address.phone"
+          autoComplete="tel"
+          value={formData["shipping_address.phone"] || ""}
+          onChange={handleChange}
+          data-testid="shipping-phone-input"
+          variant="outline"
+        />
+        <Input
+          placeholder="Departamento"
+          name="shipping_address.province"
+          autoComplete="address-level1"
+          value={formData["shipping_address.province"] || ""}
           onChange={handleChange}
           required
-          data-testid="shipping-address-input"
+          data-testid="shipping-province-input"
           variant="outline"
         />
         <Input
-          placeholder="Company"
-          name="shipping_address.company"
-          value={formData["shipping_address.company"] || ""}
-          onChange={handleChange}
-          autoComplete="organization"
-          data-testid="shipping-company-input"
-          variant="outline"
-        />
-        <Input
-          placeholder="Postal code"
-          name="shipping_address.postal_code"
-          autoComplete="postal-code"
-          value={formData["shipping_address.postal_code"] || ""}
-          onChange={handleChange}
-          required
-          data-testid="shipping-postal-code-input"
-          variant="outline"
-        />
-        <Input
-          placeholder="City"
+          placeholder="Ciudad"
           name="shipping_address.city"
           autoComplete="address-level2"
           value={formData["shipping_address.city"] || ""}
@@ -149,7 +139,36 @@ const ShippingAddress = ({
           data-testid="shipping-city-input"
           variant="outline"
         />
-        <CountrySelect
+        <Input
+          placeholder="Dirección"
+          name="shipping_address.address_1"
+          autoComplete="address-line1"
+          value={formData["shipping_address.address_1"] || ""}
+          onChange={handleChange}
+          required
+          data-testid="shipping-address-input"
+          variant="outline"
+        />
+        {/* <Input
+          placeholder="Company"
+          name="shipping_address.company"
+          value={formData["shipping_address.company"] || ""}
+          onChange={handleChange}
+          autoComplete="organization"
+          data-testid="shipping-company-input"
+          variant="outline"
+        /> */}
+        {/* <Input
+          placeholder="Postal code"
+          name="shipping_address.postal_code"
+          autoComplete="postal-code"
+          value={formData["shipping_address.postal_code"] || ""}
+          onChange={handleChange}
+          required
+          data-testid="shipping-postal-code-input"
+          variant="outline"
+        /> */}
+        {/* <CountrySelect
           name="shipping_address.country_code"
           autoComplete="country"
           region={cart?.region}
@@ -164,30 +183,11 @@ const ShippingAddress = ({
           }}
           isRequired
           data-testid="shipping-country-select"
-        />
-        <Input
-          placeholder="State / Province"
-          name="shipping_address.province"
-          autoComplete="address-level1"
-          value={formData["shipping_address.province"] || ""}
-          onChange={handleChange}
-          required
-          data-testid="shipping-province-input"
-          variant="outline"
-        />
-        <Input
-          placeholder="Phone"
-          name="shipping_address.phone"
-          autoComplete="tel"
-          value={formData["shipping_address.phone"] || ""}
-          onChange={handleChange}
-          data-testid="shipping-phone-input"
-          variant="outline"
-        />
+        /> */}
       </div>
       <div className="my-4">
         <Checkbox
-          label="Billing address same as shipping address"
+          label="¿La dirección de facturación es la misma que la dirección de envío?"
           name="same_as_billing"
           isSelected={checked}
           onChange={onChange}

@@ -26,7 +26,7 @@ const SortProducts = ({ sortBy, setQueryParams }: SortProductsProps) => {
 
   return (
     <Select
-      placeholder="Sort by"
+      placeholder="Ordenar por"
       selectedKey={sortBy || "sortBy"}
       onSelectionChange={(key) => {
         handleChange(key as SortOptions)
@@ -41,11 +41,11 @@ const SortProducts = ({ sortBy, setQueryParams }: SortProductsProps) => {
       <Popover className="w-60" crossOffset={-126}>
         <UiSelectListBox>
           <UiSelectListBoxItem id="created_at">
-            Latest Arrivals
+            Más reciente
           </UiSelectListBoxItem>
-          <UiSelectListBoxItem id="price_asc">Lowest price</UiSelectListBoxItem>
+          <UiSelectListBoxItem id="price_asc">Precio más alto</UiSelectListBoxItem>
           <UiSelectListBoxItem id="price_desc">
-            Highest price
+            Precio más bajo
           </UiSelectListBoxItem>
         </UiSelectListBox>
       </Popover>

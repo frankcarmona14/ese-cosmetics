@@ -92,22 +92,22 @@ export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
           <div className="flex justify-between items-center h-18 md:h-26">
             <div className="flex">
               <LocalizedLink href="/">
-              <div className="md:bg-white rounded-full p-1">
-                <Image src="/images/content/logo-ese-cosmetics.png"
-                  width={80}
-                  height={80}
-                  alt="Logo"
-                  quality={100}
-                  className="w-[60] h-[60] md:w-[80] md:h-[80]"
-                />
-              </div>
+                <div className="md:bg-white rounded-full p-1">
+                  <Image src="/images/content/logo-ese-cosmetics.png"
+                    width={80}
+                    height={80}
+                    alt="Logo"
+                    quality={100}
+                    className="w-[60] h-[60] md:w-[80] md:h-[80]"
+                  />
+                </div>
               </LocalizedLink>
             </div>
-            <div className="flex items-center gap-8 max-md:hidden">
+            {/* <div className="flex items-center gap-8 max-md:hidden">
               <LocalizedLink href="/about">About</LocalizedLink>
               <LocalizedLink href="/inspiration">Inspiration</LocalizedLink>
               <LocalizedLink href="/store">Tienda</LocalizedLink>
-            </div>
+            </div> */}
             <div className="flex items-center gap-3 lg:gap-6 max-md:hidden">
               <LocalizedButtonLink
                 href="/cart"
@@ -120,7 +120,7 @@ export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
               >
                 <Icon name="case" className="w-6 h-6" />
               </LocalizedButtonLink>
-              
+
               {/* <Button
                 variant="ghost"
                 className={twJoin(

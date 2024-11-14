@@ -3,53 +3,53 @@ import { Suspense } from "react"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
 import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-import Image from "next/image"
+// import Image from "next/image"
 
 import { getCollectionsList } from "@lib/data/collections"
 import { getCategoriesList } from "@lib/data/categories"
 import { getProductTypesList } from "@lib/data/product-types"
-import { LocalizedLink } from "@/components/LocalizedLink"
-import { Carousel } from "@/components/Carousel"
+// import { LocalizedLink } from "@/components/LocalizedLink"
+// import { Carousel } from "@/components/Carousel"
 import PaginatedProducts from "./paginated-products"
 
-const CollectionsSlider = async () => {
-  const collections = await getCollectionsList(0, 20, [
-    "id",
-    "title",
-    "handle",
-    "metadata",
-  ])
+// const CollectionsSlider = async () => {
+//   const collections = await getCollectionsList(0, 20, [
+//     "id",
+//     "title",
+//     "handle",
+//     "metadata",
+//   ])
 
-  if (!collections || !collections.collections.length) {
-    return null
-  }
+//   if (!collections || !collections.collections.length) {
+//     return null
+//   }
 
-  return (
-    <Carousel
-      heading={<h3 className="text-lg md:text-2xl">Collections</h3>}
-      className="mb-26 md:mb-36"
-    >
-      {collections.collections.map((c) => (
-        <div
-          key={c.id}
-          className="w-[70%] sm:w-[60%] lg:w-full max-w-72 flex-shrink-0"
-        >
-          <LocalizedLink href={`/collections/${c.handle}`}>
-            {typeof c.metadata?.image === "object" &&
-              c.metadata.image &&
-              "url" in c.metadata.image &&
-              typeof c.metadata.image.url === "string" && (
-                <div className="relative mb-4 md:mb-6 w-full aspect-[3/4]">
-                  <Image src={c.metadata.image.url} alt={c.title} fill />
-                </div>
-              )}
-            <h3>{c.title}</h3>
-          </LocalizedLink>
-        </div>
-      ))}
-    </Carousel>
-  )
-}
+//   return (
+//     <Carousel
+//       heading={<h3 className="text-lg md:text-2xl">Collections</h3>}
+//       className="mb-26 md:mb-36"
+//     >
+//       {collections.collections.map((c) => (
+//         <div
+//           key={c.id}
+//           className="w-[70%] sm:w-[60%] lg:w-full max-w-72 flex-shrink-0"
+//         >
+//           <LocalizedLink href={`/collections/${c.handle}`}>
+//             {typeof c.metadata?.image === "object" &&
+//               c.metadata.image &&
+//               "url" in c.metadata.image &&
+//               typeof c.metadata.image.url === "string" && (
+//                 <div className="relative mb-4 md:mb-6 w-full aspect-[3/4]">
+//                   <Image src={c.metadata.image.url} alt={c.title} fill />
+//                 </div>
+//               )}
+//             <h3>{c.title}</h3>
+//           </LocalizedLink>
+//         </div>
+//       ))}
+//     </Carousel>
+//   )
+// }
 
 const StoreTemplate = async ({
   sortBy,
@@ -76,8 +76,7 @@ const StoreTemplate = async ({
   const types = await getProductTypesList(0, 100, ["id", "value"])
 
   return (
-    <div className="md:pt-47 py-26 md:pb-36">
-      <CollectionsSlider />
+    <div className="py-36 md:pb-36">
       <RefinementList
         collections={Object.fromEntries(
           collections.collections.map((c) => [c.handle, c.title])

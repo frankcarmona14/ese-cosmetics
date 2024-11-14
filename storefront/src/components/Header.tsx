@@ -2,29 +2,30 @@
 import * as React from "react"
 
 // Lib
-import { listRegions } from "@lib/data/regions"
+// import { listRegions } from "@lib/data/regions"
 
 // Components
 import { Layout, LayoutColumn } from "@/components/Layout"
 import { LocalizedButtonLink, LocalizedLink } from "@/components/LocalizedLink"
 import { CartIcon } from "./CartIcon"
 import { HeaderDrawer } from "./HeaderDrawer"
-import { RegionSwitcher } from "./RegionSwitcher"
+// import { RegionSwitcher } from "./RegionSwitcher"
 import { HeaderWrapper } from "./HeaderWrapper"
+import Image from "next/image"
 
 export const Header: React.FC = async () => {
-  const regions = await listRegions()
+  // const regions = await listRegions()
 
-  const countryOptions = regions
-    .map((r) => {
-      return (r.countries ?? []).map((c) => ({
-        country: c.iso_2,
-        region: r.id,
-        label: c.display_name,
-      }))
-    })
-    .flat()
-    .sort((a, b) => (a?.label ?? "").localeCompare(b?.label ?? ""))
+  // const countryOptions = regions
+  //   .map((r) => {
+  //     return (r.countries ?? []).map((c) => ({
+  //       country: c.iso_2,
+  //       region: r.id,
+  //       label: c.display_name,
+  //     }))
+  //   })
+  //   .flat()
+  //   .sort((a, b) => (a?.label ?? "").localeCompare(b?.label ?? ""))
 
   return (
     <>
@@ -33,20 +34,30 @@ export const Header: React.FC = async () => {
           <LayoutColumn>
             <div className="flex justify-between items-center h-18 md:h-21">
               <h1 className="font-medium text-md">
-                <LocalizedLink href="/">SofaSocietyCo.</LocalizedLink>
+                <LocalizedLink href="/">
+                  <div className="md:bg-white rounded-full p-1">
+                    <Image src="/images/content/logo-ese-cosmetics.png"
+                      width={60}
+                      height={60}
+                      alt="Logo"
+                      quality={100}
+                      className="w-[60] h-[60] md:w-[70] md:h-[70]"
+                    />
+                  </div>
+                </LocalizedLink>
               </h1>
-              <div className="flex items-center gap-8 max-md:hidden">
+              {/* <div className="flex items-center gap-8 max-md:hidden">
                 <LocalizedLink href="/about">About</LocalizedLink>
                 <LocalizedLink href="/inspiration">Inspiration</LocalizedLink>
-                <LocalizedLink href="/store">Shop</LocalizedLink>
-              </div>
+                <LocalizedLink href="/store">Tienda</LocalizedLink>
+              </div> */}
               <div className="flex items-center gap-3 lg:gap-6 max-md:hidden">
-                <RegionSwitcher
+                {/* <RegionSwitcher
                   countryOptions={countryOptions}
                   className="w-16"
                   selectButtonClassName="bg-transparent border-0 h-auto !gap-0 !p-1 w-full"
                   selectIconClassName="text-current"
-                />
+                /> */}
                 {/* <Button
                   variant="ghost"
                   className="p-1 group-data-[light=true]:md:text-white group-data-[sticky=true]:md:text-black"
@@ -63,7 +74,7 @@ export const Header: React.FC = async () => {
                 <LocalizedButtonLink
                   href="/cart"
                   variant="ghost"
-                  className="p-1 group-data-[light=true]:md:text-white group-data-[sticky=true]:md:text-black"
+                  className="p-1 group-data-[light=true]:md:text-white group-data-[sticky=true]:md:text-rose-400"
                 >
                   <CartIcon className="w-6 h-6" />
                 </LocalizedButtonLink>
@@ -72,11 +83,11 @@ export const Header: React.FC = async () => {
                 <LocalizedButtonLink
                   href="/cart"
                   variant="ghost"
-                  className="p-1 group-data-[light=true]:md:text-white"
+                  className="p-1 text-rose-400"
                 >
                   <CartIcon className="w-6 h-6" wrapperClassName="w-6 h-6" />
                 </LocalizedButtonLink>
-                <HeaderDrawer countryOptions={countryOptions} />
+                <HeaderDrawer countryOptions={[]} />
               </div>
             </div>
           </LayoutColumn>

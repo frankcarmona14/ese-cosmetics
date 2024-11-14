@@ -24,7 +24,7 @@ type RefinementListProps = {
 }
 
 const RefinementList = ({
-  title = "Shop",
+  title = "Tienda",
   collections,
   collection,
   categories,
@@ -37,6 +37,8 @@ const RefinementList = ({
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
+
+  console.log(searchParams.get("categoryName"))
 
   const setQueryParams = useCallback(
     (name: string, value: string | string[]) => {
@@ -80,34 +82,16 @@ const RefinementList = ({
         </h2>
         <div className="flex justify-between gap-10">
           <MobileFilters
-            collections={collections}
-            collection={collection}
             categories={categories}
             category={category}
-            types={types}
-            type={type}
             setMultipleQueryParams={setMultipleQueryParams}
           />
           <MobileSort sortBy={sortBy} setQueryParams={setQueryParams} />
           <div className="flex justify-between gap-6 max-md:hidden">
-            {typeof collections !== "undefined" && (
-              <CollectionFilter
-                collections={collections}
-                collection={collection}
-                setQueryParams={setQueryParams}
-              />
-            )}
             {typeof categories !== "undefined" && (
               <CategoryFilter
                 categories={categories}
                 category={category}
-                setQueryParams={setQueryParams}
-              />
-            )}
-            {typeof types !== "undefined" && (
-              <TypeFilter
-                types={types}
-                type={type}
                 setQueryParams={setQueryParams}
               />
             )}

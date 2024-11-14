@@ -3,14 +3,15 @@ import { HttpTypes } from "@medusajs/types"
 import Item from "@modules/cart/components/item"
 
 type ItemsTemplateProps = {
-  items?: HttpTypes.StoreCartLineItem[]
+  items?: HttpTypes.StoreCartLineItem[] | HttpTypes.StoreOrderLineItem[] | null
+  title?: string
 }
 
-const ItemsTemplate = ({ items }: ItemsTemplateProps) => {
+const ItemsTemplate = ({ items, title }: ItemsTemplateProps) => {
   return (
     <div>
       <div className="lg:h-22 pb-12 lg:pb-0 border-b border-b-grayscale-100">
-        <h1 className="md:text-2xl text-lg leading-none">Your shopping cart</h1>
+        <h1 className="md:text-2xl text-lg leading-none">{title ?? "Your shopping cart"}</h1>
       </div>
       <div>
         {items

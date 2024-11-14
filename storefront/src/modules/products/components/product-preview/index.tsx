@@ -37,7 +37,7 @@ export default async function ProductPreview({
         thumbnail={product.thumbnail}
         images={product.images}
         size="square"
-        className="mb-4 md:mb-6"
+        className="mb-4 md:mb-6 rounded-xs"
       />
       <div className="flex justify-between max-md:flex-col">
         <div className="max-md:text-xs">

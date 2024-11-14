@@ -38,7 +38,6 @@ export default function ProductPrice({
   return (
     <>
       <p className="text-md mb-8">
-        {!variant && "From "}
         {selectedPrice.calculated_price}
       </p>
     </>

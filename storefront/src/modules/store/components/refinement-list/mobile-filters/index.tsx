@@ -39,7 +39,7 @@ export const MobileFilters: React.FC<{
         iconPosition="end"
         className="bg-white md:hidden border px-4 hover:bg-white border-grayscale-200 h-8 text-black text-xs"
       >
-        Filter
+        Filtros
       </Button>
       <ModalOverlay
         isDismissable
@@ -107,7 +107,7 @@ export const MobileFilters: React.FC<{
                     defaultValue={category ?? []}
                   >
                     <Label className="block text-md font-semibold mb-3">
-                      Categories
+                      Categorias
                     </Label>
                     {Object.entries(categories).map(([key, value]) => (
                       <UiCheckbox

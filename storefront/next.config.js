@@ -20,6 +20,14 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "prueba-servy.lon1.cdn.digitaloceanspaces.com"
+      },
+      { 
+        protocol: "https",
+        hostname: "img.freepik.com"
+      },
+      {
+        protocol: "https",
+        hostname: "static.wixstatic.com"
       }
     ],
   },

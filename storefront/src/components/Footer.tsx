@@ -11,11 +11,15 @@ export const Footer: React.FC = () => {
           <div className="flex max-lg:flex-col justify-between md:gap-20 max-md:px-4">
             <div className="flex flex-1 max-lg:w-full max-lg:order-2 max-sm:flex-col justify-between sm:gap-30 lg:gap-20 md:items-center">
               <div className="max-w-35 md:flex-1 max-md:mb-9">
-                <h1 className="text-lg md:text-xl mb-2 md:mb-6 !leading-[0.9]">
-                  Sofa Society Co.
-                </h1>
+                <LocalizedLink className="flex items-center justify-center" href="/">
+                  <img
+                    src="/images/content/logo-ese-cosmetics.png"
+                    alt="Ese Cosmetics"
+                    className="object-cover mb-2 md:mb-6"
+                  />
+                </LocalizedLink>
                 <p className="text-xs">
-                  &copy; {new Date().getFullYear()}, Sofa Society
+                  &copy; {new Date().getFullYear()}, Ese Cosmetics
                 </p>
               </div>
               <div className="flex gap-10 xl:gap-18 max-md:text-xs flex-1 justify-between lg:justify-center">

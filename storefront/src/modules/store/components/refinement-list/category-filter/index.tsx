@@ -23,7 +23,7 @@ export const CategoryFilter: React.FC<{
 }> = ({ category, categories, setQueryParams }) => (
   <DialogTrigger>
     <UiSelectButton className="w-35">
-      <span>Category</span>
+      <span>Categoria</span>
       <UiSelectIcon />
     </UiSelectButton>
     <Popover className="w-64" crossOffset={58}>

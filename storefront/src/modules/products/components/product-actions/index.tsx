@@ -1,23 +1,16 @@
 "use client"
 
-import { isEqual } from "lodash"
+import { isEqual, set } from "lodash"
+import { useParams } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
 import { HttpTypes } from "@medusajs/types"
-import { Popover, Radio, RadioGroup, Select } from "react-aria-components"
-
+import { Radio, RadioGroup } from "react-aria-components"
 import { addToCart } from "@lib/data/cart"
 import { getVariantItemsInStock } from "@lib/util/inventory"
 import { Button } from "@/components/Button"
 import { NumberField } from "@/components/NumberField"
-import {
-  UiSelectButton,
-  UiSelectIcon,
-  UiSelectListBox,
-  UiSelectListBoxItem,
-  UiSelectValue,
-} from "@/components/ui/Select"
-import { useCountryCode } from "hooks/country-code"
 import ProductPrice from "../product-price"
+import { toast } from "@medusajs/ui"
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
@@ -81,7 +74,8 @@ export default function ProductActions({
   )
   const [quantity, setQuantity] = useState(1)
   const [isAdding, setIsAdding] = useState(false)
-  const countryCode = useCountryCode()
+  const [error, setError] = useState("")
+  const countryCode = useParams().countryCode as string
 
   // If there is only 1 variant, preselect the options
   useEffect(() => {
@@ -117,7 +111,10 @@ export default function ProductActions({
 
   // add the selected variant to the cart
   const handleAddToCart = async () => {
-    if (!selectedVariant?.id) return null
+    if (!selectedVariant?.id) {
+      setError("Por favor selecciona un color")
+      return null
+    }
 
     setIsAdding(true)
 
@@ -127,7 +124,19 @@ export default function ProductActions({
       countryCode,
     })
 
+    toast.success("Producto añadido al carrito")
+
     setIsAdding(false)
+  }
+
+  const handleSetQuantity = (value: number) => {
+    if (!selectedVariant?.id) {
+      setError("Por favor selecciona un color")
+      return
+    }
+
+    setQuantity(value)
+
   }
 
   const hasMultipleVariants = (product.variants?.length ?? 0) > 1
@@ -151,8 +160,8 @@ export default function ProductActions({
   const otherOptions =
     materialOption && colorOption
       ? productOptions.filter(
-          (o) => o.id !== materialOption.id && o.id !== colorOption.id
-        )
+        (o) => o.id !== materialOption.id && o.id !== colorOption.id
+      )
       : productOptions
 
   const selectedMaterial =
@@ -169,131 +178,48 @@ export default function ProductActions({
   return (
     <>
       <ProductPrice product={product} variant={selectedVariant} />
-      <div className="max-md:text-xs mb-8 md:mb-16 max-w-120">
+      <div className="max-md:text-xs mb-8 md:mb-12 max-w-120 text-grayscale-600">
         <p>{product.description}</p>
       </div>
       {hasMultipleVariants && (
-        <div className="flex flex-col gap-8 md:gap-6 mb-10 md:mb-26">
-          {materialOption && colorOption && (
-            <>
-              <div>
-                <p className="mb-4">
-                  Materials
-                  {options[materialOption.id] && (
-                    <span className="text-grayscale-500 ml-6">
-                      {options[materialOption.id]}
-                    </span>
-                  )}
-                </p>
-                <Select
-                  selectedKey={options[materialOption.id] ?? null}
-                  onSelectionChange={(value) => {
-                    setOptionValue(materialOption.id, `${value}`)
-                  }}
-                  placeholder="Choose material"
-                  className="w-full md:w-60"
-                  isDisabled={!!disabled || isAdding}
-                  aria-label="Material"
-                >
-                  <UiSelectButton className="!h-12 px-4 gap-2 max-md:text-base">
-                    <UiSelectValue />
-                    <UiSelectIcon className="h-6 w-6" />
-                  </UiSelectButton>
-                  <Popover className="w-[--trigger-width]">
-                    <UiSelectListBox>
-                      {materials.map((material) => (
-                        <UiSelectListBoxItem
-                          key={material.id}
-                          id={material.name}
-                        >
-                          {material.name}
-                        </UiSelectListBoxItem>
-                      ))}
-                    </UiSelectListBox>
-                  </Popover>
-                </Select>
-              </div>
-              {selectedMaterial && (
-                <div>
-                  <p className="mb-4">
-                    Colors
-                    <span className="text-grayscale-500 ml-6">
-                      {options[colorOption.id]}
-                    </span>
-                  </p>
-                  <RadioGroup
-                    value={options[colorOption.id] ?? null}
-                    onChange={(value) => {
-                      setOptionValue(colorOption.id, value)
-                    }}
-                    aria-label="Color"
-                    className="flex gap-6"
-                    isDisabled={!!disabled || isAdding}
-                  >
-                    {selectedMaterial.colors.map((color) => (
-                      <Radio
-                        key={color.id}
-                        value={color.name}
-                        aria-label={color.name}
-                        className="h-8 w-8 cursor-pointer relative before:transition-colors before:absolute before:content-[''] before:-bottom-2 before:left-0 before:w-full before:h-px data-[selected]:before:bg-black shadow-sm hover:shadow"
-                        style={{ background: color.hex_code }}
-                      />
-                    ))}
-                  </RadioGroup>
-                </div>
-              )}
-            </>
+        <div className="flex flex-col gap-8 md:gap-6 mb-10 md:mb-16">
+          {colorOption && (
+            <div className={`p-4 rounded-md border ${error ? 'border-red-900' : ''}`}>
+              <p className="mb-4">
+                Colores
+                <span className="text-grayscale-500 ml-6">
+                  {options[colorOption.id]}
+                </span>
+              </p>
+              <RadioGroup
+                value={options[colorOption.id] ?? null}
+                onChange={(value) => {
+                  setOptionValue(colorOption.id, value)
+                  setError("")
+                }}
+                aria-label="Color"
+                className="flex gap-3 mb-2"
+                isDisabled={!!disabled || isAdding}
+              >
+                {selectedMaterial?.colors.map((color) => (
+                  <Radio
+                    key={color.id}
+                    value={color.name}
+                    aria-label={color.name}
+                    className="h-6 w-6 cursor-pointer relative before:transition-colors before:absolute before:content-[''] before:-bottom-2 before:left-0 before:w-full before:h-px data-[selected]:before:bg-black shadow-sm hover:shadow"
+                    style={{ background: color.hex_code }}
+                  />
+                ))}
+              </RadioGroup>
+            </div>
           )}
-          {showOtherOptions &&
-            otherOptions.map((option) => {
-              return (
-                <div key={option.id}>
-                  <p className="mb-4">
-                    {option.title}
-                    {options[option.id] && (
-                      <span className="text-grayscale-500 ml-6">
-                        {options[option.id]}
-                      </span>
-                    )}
-                  </p>
-                  <Select
-                    selectedKey={options[option.id] ?? null}
-                    onSelectionChange={(value) => {
-                      setOptionValue(option.id, `${value}`)
-                    }}
-                    placeholder={`Choose ${option.title.toLowerCase()}`}
-                    className="w-full md:w-60"
-                    isDisabled={!!disabled || isAdding}
-                    aria-label={option.title}
-                  >
-                    <UiSelectButton className="!h-12 px-4 gap-2 max-md:text-base">
-                      <UiSelectValue />
-                      <UiSelectIcon className="h-6 w-6" />
-                    </UiSelectButton>
-                    <Popover className="w-[--trigger-width]">
-                      <UiSelectListBox>
-                        {(option.values ?? [])
-                          .filter((value) => Boolean(value.value))
-                          .map((value) => (
-                            <UiSelectListBoxItem
-                              key={value.id}
-                              id={value.value}
-                            >
-                              {value.value}
-                            </UiSelectListBoxItem>
-                          ))}
-                      </UiSelectListBox>
-                    </Popover>
-                  </Select>
-                </div>
-              )
-            })}
+          {error && <p className="text-red-900 mb-4">{error}</p>}
         </div>
       )}
       <div className="flex max-sm:flex-col gap-4 mb-4">
         <NumberField
           value={quantity}
-          onChange={setQuantity}
+          onChange={handleSetQuantity}
           minValue={1}
           maxValue={itemsInStock}
           className="w-full sm:w-35 max-md:justify-center max-md:gap-2"
@@ -306,8 +232,8 @@ export default function ProductActions({
           className="sm:flex-1"
         >
           {!selectedVariant
-            ? "Seleccione un Color"
-            : !inStock
+            ? "Selecciona un Color"
+            : !itemsInStock
               ? "Producto agotado"
               : "Añadir al carrito"}
         </Button>

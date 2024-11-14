@@ -1,3 +1,4 @@
+"use client"
 import ItemsTemplate from "./items"
 import Summary from "./summary"
 import EmptyCartMessage from "../components/empty-cart-message"
@@ -5,6 +6,8 @@ import { HttpTypes } from "@medusajs/types"
 
 // Components
 import { Layout, LayoutColumn } from "@/components/Layout"
+import { applyPromotions } from "@lib/data/cart"
+import { useEffect } from "react"
 
 // TODO: Ask customer if they want to sign in or continue as guest
 const CartTemplate = ({
@@ -14,6 +17,13 @@ const CartTemplate = ({
   cart: HttpTypes.StoreCart | null
   customer: HttpTypes.StoreCustomer | null
 }) => {
+
+  // useEffect(() => {
+  //   if (cart?.total) {
+  //     cart?.total >= 150000 && !cart?.promotions ? applyPromotions(["DISCOUNT7"]) : applyPromotions([])
+  //   }
+  // }, [cart?.total])
+
   return (
     <Layout className="pt-39 pb-36">
       {cart?.items?.length ? (

@@ -1,8 +1,12 @@
+"use client"
 import { HttpTypes } from "@medusajs/types"
 
 import PaymentDetails from "@modules/order/components/payment-details"
 import { Layout, LayoutColumn } from "@/components/Layout"
 import { LocalizedButtonLink } from "@/components/LocalizedLink"
+import ItemsTemplate from "@modules/cart/templates/items"
+import sendWhatsappMessage from "@lib/util/send-whatsapp-message"
+import { useEffect, useState } from "react"
 
 type OrderCompletedTemplateProps = {
   order: HttpTypes.StoreOrder
@@ -11,25 +15,57 @@ type OrderCompletedTemplateProps = {
 export default function OrderCompletedTemplate({
   order,
 }: OrderCompletedTemplateProps) {
+  const [ sendedMessage, setSendedMessage ] = useState(false)
+
+  const message = `Tu pedido ha sido realizado con éxito y será procesado en breve.Número de pedido #24${order.display_id}.
+  
+DATOS DEL CLIENTE
+
+${order.shipping_address?.first_name} ${order.shipping_address?.last_name}
+${order.shipping_address?.phone}
+${order.shipping_address?.address_1}
+${order.shipping_address?.city}
+
+PRODUCTOS
+
+${order.items?.map((item) => `${item.subtitle}"\n"${item.quantity}x ${item.unit_price} = ${item.total}`).join("\n")} 
+
+PEDIDO GENERADO POR
+----------------------------------
+inversionesesecosmetics
+
+LINK DEL PEDIDO
+----------------------------------
+https://vercatalogo.com/inversionesesecosmetics/view-order/invefkln9h3t27e`
+
+  useEffect(() => {
+    if (!sendedMessage) {
+      sendWhatsappMessage(order.shipping_address?.phone || "", message)
+      setSendedMessage(true)
+    }
+  }, [sendedMessage])
+
   return (
     <Layout className="pt-39 pb-36">
       <LayoutColumn
         start={{ base: 1, lg: 3, xl: 4 }}
         end={{ base: 13, lg: 11, xl: 10 }}
       >
-        <h1 className="text-xl md:text-2xl mb-6">Thank you for your order!</h1>
+        <h1 className="text-xl md:text-2xl mb-6 text-center">¡Gracias por tu pedido!</h1>
         <p className="mb-4">
-          We are pleased to confirm that your order has been successfully placed
-          and will be processed shortly.
+          Nos complace confirmar que tu pedido ha sido realizado con éxito y será procesado en breve.
         </p>
         <p>
-          We have sent you the receipt and order details via{" "}
-          <strong>e-mail</strong>.<br />
-          Your order number is <strong>#{order.display_id}</strong>.
+          Te hemos enviado los detalles del pedido a través de{" "}
+          <strong>WhatsApp</strong>.<br />
+          Tu número de pedido es <strong>#{order.display_id}</strong>.
         </p>
-        <div className="flex flex-col sm:flex-row mt-16 gap-8">
+        <div className="flex flex-col sm:flex-row my-16 gap-8">
           <div className="flex-grow">
-            <h2 className="font-normal">Shipping adress:</h2>
+            <h2 className="font-semibold">Identificador</h2>
+            <p className="text-grayscale-500">{order.id}</p>
+            <br />
+            <h2 className="font-semibold">Dirección de envío</h2>
             <p className="text-grayscale-500">
               {[
                 order.shipping_address?.first_name,
@@ -54,14 +90,11 @@ export default function OrderCompletedTemplate({
               {order.shipping_address?.phone}
             </p>
           </div>
-          <div>
-            <h2 className="font-normal">Payment:</h2>
-            <PaymentDetails order={order} />
-          </div>
         </div>
+        <ItemsTemplate title="Productos" items={order.items} />
 
         <LocalizedButtonLink href="/" isFullWidth className="mt-16">
-          Go back to home page
+          Volver a la página principal
         </LocalizedButtonLink>
       </LayoutColumn>
     </Layout>

@@ -32,7 +32,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
 
   const color = await fashionModuleService.updateColors({
     id: req.params.colorId,
-    ...colorsUpdateBodySchema.parse(req.body),
+    ...colorsUpdateBodySchema.parse(JSON.parse(Object(req.body))),
   });
 
   res.status(200).json(color);

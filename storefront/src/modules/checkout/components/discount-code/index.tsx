@@ -39,12 +39,12 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         value={promotionCode}
         onChange={(e) => setPromotionCode(e.target.value)}
         variant="outline"
-        placeholder="Discount code"
+        placeholder="Código de descuento"
         wrapperClassName="flex-1"
         className="max-lg:h-12"
       />
       <Button onPress={addPromotionCode} className="lg:h-auto grow-0 h-12">
-        Apply
+        Aplicar Cupón
       </Button>
     </div>
   )

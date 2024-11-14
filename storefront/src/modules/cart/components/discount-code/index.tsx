@@ -26,6 +26,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
       .map((p) => p.code!)
     codes.push(promotionCode)
 
+
     await applyPromotions(codes)
 
     setPromotionCode("")
@@ -39,11 +40,11 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         value={promotionCode}
         onChange={(e) => setPromotionCode(e.target.value)}
         uiSize="md"
-        placeholder="Discount code"
+        placeholder="Código de descuento"
         variant="outline"
         wrapperClassName="flex flex-1"
       />
-      <Button onPress={addPromotionCode}>Apply</Button>
+      <Button onPress={addPromotionCode}>Aplicar Cupón</Button>
     </div>
   )
 }
