@@ -53,9 +53,9 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       <Toaster position="top-center" />
       <Layout>
         <LayoutColumn className="mb-16">
-          <div className="flex max-lg:flex-col gap-8 xl:gap-27">
+          <div className="flex items-center max-lg:flex-col gap-8 xl:gap-27">
             {hasImages && (
-              <div className="lg:w-1/2 flex flex-1 flex-col gap-8">
+              <div className="w-[75%] lg:w-1/2 flex flex-1 flex-col gap-8">
                 <ImageGallery images={images} />
               </div>
             )}

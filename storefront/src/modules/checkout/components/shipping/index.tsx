@@ -125,7 +125,7 @@ const Shipping: React.FC<ShippingProps> = ({
               isLoading={isLoading}
               disabled={!cart.shipping_methods?.[0]}
             >
-              Next
+              Siguiente
             </Button>
           </div>
         )

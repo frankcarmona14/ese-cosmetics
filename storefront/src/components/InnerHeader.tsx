@@ -103,11 +103,13 @@ export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
                 </div>
               </LocalizedLink>
             </div>
-            {/* <div className="flex items-center gap-8 max-md:hidden">
-              <LocalizedLink href="/about">About</LocalizedLink>
-              <LocalizedLink href="/inspiration">Inspiration</LocalizedLink>
+            <div className="flex items-center gap-8 max-md:hidden">
               <LocalizedLink href="/store">Tienda</LocalizedLink>
-            </div> */}
+              <LocalizedLink href="/categories/esmaltes">Esmaltes</LocalizedLink>
+              <LocalizedLink href="/categories/maquillaje">Maquillaje</LocalizedLink>
+              <LocalizedLink href="/categories/skin-care">Skin Care</LocalizedLink>
+              <LocalizedLink href="/categories/decoraciones">Decoraciones</LocalizedLink>
+            </div>
             <div className="flex items-center gap-3 lg:gap-6 max-md:hidden">
               <LocalizedButtonLink
                 href="/cart"

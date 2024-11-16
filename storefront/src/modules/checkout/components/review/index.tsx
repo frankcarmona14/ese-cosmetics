@@ -17,9 +17,10 @@ const Review = ({ cart }: { cart: any }) => {
     cart?.gift_cards && cart?.gift_cards?.length > 0 && cart?.total === 0
 
   const previousStepsCompleted =
-    cart.shipping_address &&
-    cart.shipping_methods.length > 0 &&
-    (cart.payment_collection || paidByGiftcard)
+    cart.shipping_address 
+    // &&
+    // cart.shipping_methods.length > 0 
+    // && (cart.payment_collection || paidByGiftcard)
 
   return (
     <>
@@ -45,18 +46,18 @@ const Review = ({ cart }: { cart: any }) => {
                 router.push(pathname + "?step=review", { scroll: false })
               }}
             >
-              View
+              Ver
             </Button>
           )}
       </div>
       {isOpen && previousStepsCompleted && (
         <>
-          <p className="mb-4">
-            By clicking the Place Order button, you confirm that you have read,
-            understand and accept our Terms of Use, Terms of Sale and Returns
-            Policy and acknowledge that you have read Medusa Store&apos;s
-            Privacy Policy.
-          </p>
+            <p className="mb-4">
+            Al hacer clic en el botón Realizar pedido, confirmas que has leído,
+            entendido y aceptado nuestros Términos de uso, Términos de venta y
+            Política de devoluciones y reconoces que has leído la Política de
+            privacidad de Ese Cosmetics.
+            </p>
           <PaymentButton
             cart={cart}
             selectPaymentMethod={() => {

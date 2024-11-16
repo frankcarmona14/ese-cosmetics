@@ -14,9 +14,10 @@ import { LocalizedLink } from "@/components/LocalizedLink"
 
 type ItemProps = {
   item: HttpTypes.StoreCartLineItem | HttpTypes.StoreOrderLineItem
+  type?: string
 }
 
-const Item = ({ item }: ItemProps) => {
+const Item = ({ item, type }: ItemProps) => {
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -62,6 +63,7 @@ const Item = ({ item }: ItemProps) => {
               {item.variant?.title}
             </p>
           </div>
+          {type !== "order" &&
           <NumberField
             size="sm"
             minValue={1}
@@ -71,11 +73,11 @@ const Item = ({ item }: ItemProps) => {
             isDisabled={updating}
             className="w-25"
             aria-label="Quantity"
-          />
+          />}
         </div>
-        <div className="flex flex-col justify-between items-end text-right">
+        <div className={`flex flex-col ${type !== "order" ? "justify-between" : "justify-center"} items-end text-right`}>
           <LineItemUnitPrice item={item} />
-          <DeleteButton id={item.id} data-testid="product-delete-button" />
+          {type !== "order" && <DeleteButton id={item.id} data-testid="product-delete-button" />}
         </div>
       </div>
       <ErrorMessage error={error} data-testid="product-error-message" />

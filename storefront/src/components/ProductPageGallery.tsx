@@ -69,8 +69,8 @@ export const ProductPageGallery: React.FC<
         >
           <IconCircle
             className={twJoin(
-              "bg-black text-white transition-colors",
-              prevBtnDisabled && "bg-transparent text-black"
+              "bg-rose-400 border-rose-400 text-white transition-colors",
+              prevBtnDisabled && "bg-white opacity-75 text-rose-400"
             )}
           >
             <Icon name="arrow-left" className="w-6 h-6" />
@@ -95,15 +95,15 @@ export const ProductPageGallery: React.FC<
         >
           <IconCircle
             className={twJoin(
-              "bg-black text-white transition-colors",
-              nextBtnDisabled && "bg-transparent text-black"
+              "bg-rose-400 border-rose-400 text-white transition-colors",
+              nextBtnDisabled && "bg-white opacity-75 text-rose-400"
             )}
           >
             <Icon name="arrow-right" className="w-6 h-6" />
           </IconCircle>
         </button>
       </div>
-      <div className="flex justify-center max-lg:w-full max-lg:absolute max-lg:bottom-1">
+      <div className="flex justify-center xs:mt-3">
         {scrollSnaps.map((_, index) => (
           <button
             key={index}

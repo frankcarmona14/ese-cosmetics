@@ -68,7 +68,7 @@ export const MobileSort: React.FC<{
                 </RadioGroup>
                 <footer className="flex items-center h-21 fixed bottom-0 left-0 w-full bg-white px-6 border-t border-grayscale-100">
                   <Button type="submit" isFullWidth>
-                    Aplicar
+                    Ordenar
                   </Button>
                 </footer>
               </form>

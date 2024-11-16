@@ -307,8 +307,6 @@ const addressesFormSchema = z
       first_name: z.string(),
       last_name: z.string(),
       address_1: z.string(),
-      company: z.string(),
-      postal_code: z.string(),
       city: z.string(),
       country_code: z.string(),
       province: z.string(),
@@ -326,8 +324,6 @@ const addressesFormSchema = z
           first_name: z.string(),
           last_name: z.string(),
           address_1: z.string(),
-          company: z.string(),
-          postal_code: z.string(),
           city: z.string(),
           country_code: z.string(),
           province: z.string(),
@@ -352,8 +348,6 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
         first_name: formData.get("shipping_address.first_name"),
         last_name: formData.get("shipping_address.last_name"),
         address_1: formData.get("shipping_address.address_1"),
-        company: formData.get("shipping_address.company"),
-        postal_code: formData.get("shipping_address.postal_code"),
         city: formData.get("shipping_address.city"),
         country_code: formData.get("shipping_address.country_code"),
         province: formData.get("shipping_address.province"),
@@ -364,8 +358,6 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
         first_name: formData.get("billing_address.first_name"),
         last_name: formData.get("billing_address.last_name"),
         address_1: formData.get("billing_address.address_1"),
-        company: formData.get("billing_address.company"),
-        postal_code: formData.get("billing_address.postal_code"),
         city: formData.get("billing_address.city"),
         country_code: formData.get("billing_address.country_code"),
         province: formData.get("billing_address.province"),
@@ -385,7 +377,7 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
   }
 
   redirect(
-    `/${formData.get("shipping_address.country_code")}/checkout?step=shipping`
+    `/${formData.get("shipping_address.country_code")}/checkout?step=review`
   )
 }
 
@@ -404,8 +396,29 @@ export async function placeOrder() {
     .catch(medusaError)
 
   if (cartRes?.type === "order") {
-    const countryCode =
-      cartRes.order.shipping_address?.country_code?.toLowerCase()
+    const countryCode = cartRes.order.shipping_address?.country_code?.toLowerCase()
+    const message = `Tu pedido ha sido realizado con éxito y será procesado en breve.Número de pedido #24${cartRes.order.display_id}.
+  
+    DATOS DEL CLIENTE
+    
+    ${cartRes.order.shipping_address?.first_name} ${cartRes.order.shipping_address?.last_name}
+    ${cartRes.order.shipping_address?.phone}
+    ${cartRes.order.shipping_address?.address_1}
+    ${cartRes.order.shipping_address?.city}
+    
+    PRODUCTOS
+
+    ${cartRes.order.items?.map((item) => `${item.subtitle}"\n"${item.quantity}x ${item.unit_price} = ${item.total}`).join("\n")} 
+    
+    PEDIDO GENERADO POR
+
+    Inversiones Ese Cosmetics
+    
+    LINK DEL PEDIDO
+
+    https://vercatalogo.com/inversionesesecosmetics/view-order/invefkln9h3t27e`
+
+    await sendWhatsappMessage(cartRes.order.shipping_address?.phone || "", message)
     await removeCartId()
     redirect(`/${countryCode}/order/confirmed/${cartRes?.order.id}`)
   }

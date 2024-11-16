@@ -40,7 +40,7 @@ const Summary = ({ cart }: SummaryProps) => {
         isFullWidth
         className="mt-10"
       >
-        Proceed to checkout
+        Pasar por caja
       </LocalizedButtonLink>
     </>
   )

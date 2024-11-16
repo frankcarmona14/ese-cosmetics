@@ -39,7 +39,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         value={promotionCode}
         onChange={(e) => setPromotionCode(e.target.value)}
         variant="outline"
-        placeholder="Código de descuento"
+        placeholder="Cupón"
         wrapperClassName="flex-1"
         className="max-lg:h-12"
       />

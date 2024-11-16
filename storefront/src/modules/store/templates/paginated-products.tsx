@@ -73,13 +73,19 @@ export default async function PaginatedProducts({
   return (
     <>
       <Layout className="gap-y-10 md:gap-y-16 mb-16 md:mb-20">
-        {products.map((p) => {
-          return (
+        {products.length > 0
+          ? products.map((p) => (
             <LayoutColumn key={p.id} className="md:!col-span-4 !col-span-6">
               <ProductPreview product={p} region={region} />
             </LayoutColumn>
-          )
-        })}
+          ))
+          : (
+            <LayoutColumn className="pt-8 ">
+              <h3 className="text-sm md:text-md font-semibold text-grayscale-700">¡Ups! Lamentablemente no pudimos encontrar ningún resultado.</h3>
+              <p className="text-base text-grayscale-500">Intenta ajustar tus filtros o vuelve a intentarlo más tarde.</p>
+            </LayoutColumn>
+            )
+        }
       </Layout>
       {totalPages > 1 && (
         <Pagination

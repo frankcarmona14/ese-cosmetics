@@ -38,8 +38,6 @@ const RefinementList = ({
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  console.log(searchParams.get("categoryName"))
-
   const setQueryParams = useCallback(
     (name: string, value: string | string[]) => {
       const query = new URLSearchParams(searchParams)
@@ -77,7 +75,7 @@ const RefinementList = ({
   return (
     <Layout className="mb-4 md:mb-6">
       <LayoutColumn>
-        <h2 className="text-lg md:text-2xl mb-6" id="products">
+        <h2 className="text-lg md:text-2xl mb-6 text-grayscale-700" id="products">
           {title}
         </h2>
         <div className="flex justify-between gap-10">

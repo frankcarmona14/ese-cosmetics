@@ -48,7 +48,7 @@ const Email = ({
               router.push(pathname + "?step=email")
             }}
           >
-            Change
+            Editar
           </Button>
         )}
       </div>
@@ -67,7 +67,7 @@ const Email = ({
             data-testid="shipping-email-input"
             variant="outline"
           />
-          <SubmitButton className="mt-6">Next</SubmitButton>
+          <SubmitButton className="mt-6">Siguiente</SubmitButton>
           <ErrorMessage error={state} />
         </form>
       ) : cart?.email ? (

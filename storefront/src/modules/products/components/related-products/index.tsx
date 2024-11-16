@@ -50,7 +50,7 @@ export default async function RelatedProducts({
   return (
     <>
       <Carousel
-        heading={<h3 className="text-lg md:text-2xl">Productos relacionados</h3>}
+        heading={<h3 className="text-lg md:text-2xl text-grayscale-600">Productos relacionados</h3>}
       >
         {products.map((product) => (
           <div

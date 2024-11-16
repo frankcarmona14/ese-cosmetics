@@ -1,12 +1,12 @@
 "use client"
 
-import { useActionState } from "react"
+import { useActionState, useState } from "react"
 import { useToggleState } from "@medusajs/ui"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { twJoin } from "tailwind-merge"
 import { HttpTypes } from "@medusajs/types"
 
-import { setAddresses } from "@lib/data/cart"
+import { setAddresses, setShippingMethod } from "@lib/data/cart"
 import compareAddresses from "@lib/util/compare-addresses"
 import { Button } from "@/components/Button"
 import BillingAddress from "../billing_address"
@@ -33,6 +33,18 @@ const Addresses = ({
       : true
   )
 
+  // const setShipping = async (id: string) => {
+  //   await setShippingMethod({ cartId: cart?.id, shippingMethodId: id })
+  //     .then((data) => {
+  //       console.log("Shipping method set" + data)
+  //     })
+  //     .catch((err) => {
+  //       console.error(err.message)
+  //     })
+  // }
+
+  // setShipping("sp_01JAZHT8R1HN9TNB8JS7H4ATWH")
+  
   const [message, formAction] = useActionState(setAddresses, null)
 
   return (
@@ -45,7 +57,7 @@ const Addresses = ({
               isOpen && "font-semibold"
             )}
           >
-            2. Delivery details
+            2. Dirección de envío
           </p>
         </div>
         {!isOpen && cart?.shipping_address && (
@@ -55,7 +67,7 @@ const Addresses = ({
               router.push(pathname + "?step=delivery")
             }}
           >
-            Change
+            Editar
           </Button>
         )}
       </div>
@@ -70,13 +82,13 @@ const Addresses = ({
           />
 
           {!sameAsBilling && <BillingAddress cart={cart} />}
-          <SubmitButton className="mt-6">Next</SubmitButton>
+          <SubmitButton className="mt-6">Siguiente</SubmitButton>
           <ErrorMessage error={message} />
         </form>
       ) : cart?.shipping_address ? (
         <div className="flex flex-col gap-4">
           <div className="flex flex-row gap-16">
-            <div className="text-grayscale-500">Shipping address</div>
+            <div className="text-grayscale-500">Dirección de Envío</div>
             <div>
               {[
                 cart.shipping_address.first_name,
@@ -96,14 +108,12 @@ const Addresses = ({
                 .filter(Boolean)
                 .join(" ")}
               <br />
-              {cart.shipping_address.country_code?.toUpperCase()}
-              <br />
               {cart.shipping_address.phone}
             </div>
           </div>
           {sameAsBilling || cart.billing_address ? (
             <div className="flex flex-row gap-16">
-              <div className="text-grayscale-500">Billing address</div>
+              <div className="text-grayscale-500">Dirección de facturación</div>
               <div>
                 {sameAsBilling ? (
                   "Same as shipping address"

@@ -46,11 +46,15 @@ export const Header: React.FC = async () => {
                   </div>
                 </LocalizedLink>
               </h1>
-              {/* <div className="flex items-center gap-8 max-md:hidden">
-                <LocalizedLink href="/about">About</LocalizedLink>
-                <LocalizedLink href="/inspiration">Inspiration</LocalizedLink>
-                <LocalizedLink href="/store">Tienda</LocalizedLink>
-              </div> */}
+              <div className="backdrop-blur-sm text-grayscale-600 bg-white/30 px-3 py-4 font-medium rounded-lg">
+                <div className="flex items-center gap-8 max-md:hidden">
+                  <LocalizedLink href="/store" className="hover:text-grayscale-800">Tienda</LocalizedLink>
+                  <LocalizedLink href="/categories/esmaltes" className="hover:text-grayscale-800">Esmaltes</LocalizedLink>
+                  <LocalizedLink href="/categories/maquillaje" className="hover:text-grayscale-800">Maquillaje</LocalizedLink>
+                  <LocalizedLink href="/categories/skin-care" className="hover:text-grayscale-800">Skin Care</LocalizedLink>
+                  <LocalizedLink href="/categories/decoraciones" className="hover:text-grayscale-800">Decoraciones</LocalizedLink>
+                </div>
+              </div>
               <div className="flex items-center gap-3 lg:gap-6 max-md:hidden">
                 {/* <RegionSwitcher
                   countryOptions={countryOptions}

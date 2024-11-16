@@ -152,7 +152,7 @@ export const MobileFilters: React.FC<{
                 )}
                 <footer className="flex items-center h-21 fixed bottom-0 left-0 w-full bg-white px-6 border-t border-grayscale-100">
                   <Button type="submit" isFullWidth>
-                    Show results
+                    Aplicar Filtros
                   </Button>
                 </footer>
               </form>

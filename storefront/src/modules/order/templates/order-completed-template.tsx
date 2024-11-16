@@ -91,7 +91,7 @@ https://vercatalogo.com/inversionesesecosmetics/view-order/invefkln9h3t27e`
             </p>
           </div>
         </div>
-        <ItemsTemplate title="Productos" items={order.items} />
+        <ItemsTemplate title="Productos" type="order" items={order.items} />
 
         <LocalizedButtonLink href="/" isFullWidth className="mt-16">
           Volver a la página principal

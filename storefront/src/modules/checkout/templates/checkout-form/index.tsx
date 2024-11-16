@@ -7,6 +7,7 @@ import Email from "@modules/checkout/components/email"
 import Payment from "@modules/checkout/components/payment"
 import Review from "@modules/checkout/components/review"
 import Shipping from "@modules/checkout/components/shipping"
+import { initiatePaymentSession, setShippingMethod } from "@lib/data/cart"
 
 export default async function CheckoutForm({
   cart,
@@ -28,12 +29,22 @@ export default async function CheckoutForm({
     return null
   }
 
+  const activeSession = cart.payment_collection?.payment_sessions?.find(
+    (paymentSession: any) => paymentSession.status === "pending"
+  )
+
+  const selectedPaymentMethod = activeSession?.provider_id ?? "pp_system_default"
+
+  if (!activeSession) {
+    await initiatePaymentSession(selectedPaymentMethod)
+  }
+
   return (
     <>
       <Email cart={cart} customer={customer} countryCode={countryCode} />
       <Addresses cart={cart} customer={customer} />
-      <Shipping cart={cart} availableShippingMethods={shippingMethods} />
-      <Payment cart={cart} availablePaymentMethods={paymentMethods} />
+      {/* <Shipping cart={cart} availableShippingMethods={shippingMethods} />
+      <Payment cart={cart} availablePaymentMethods={paymentMethods} /> */}
       <Review cart={cart} />
     </>
   )

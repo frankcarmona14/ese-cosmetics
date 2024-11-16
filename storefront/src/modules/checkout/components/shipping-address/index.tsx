@@ -57,7 +57,7 @@ const ShippingAddress = ({
     }
   }, [cart])
 
-  const handleChange = (
+  const handleChange = async (
     e:
       | React.ChangeEvent<
           HTMLInputElement | HTMLInputElement | HTMLSelectElement
@@ -168,7 +168,8 @@ const ShippingAddress = ({
           data-testid="shipping-postal-code-input"
           variant="outline"
         /> */}
-        {/* <CountrySelect
+        <CountrySelect
+          className="hidden"
           name="shipping_address.country_code"
           autoComplete="country"
           region={cart?.region}
@@ -181,9 +182,8 @@ const ShippingAddress = ({
               },
             })
           }}
-          isRequired
           data-testid="shipping-country-select"
-        /> */}
+        />
       </div>
       <div className="my-4">
         <Checkbox
