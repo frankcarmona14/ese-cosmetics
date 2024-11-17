@@ -58,7 +58,9 @@ const media: CarouselItem[] = [
 //   })
 //   .catch((error) => console.error('Error fetching Instagram posts:', error));
 
-export default () => {
+interface InstagramCarouselProps {}
+
+const InstagramCarousel: React.FC<InstagramCarouselProps> = () => {
   return (
     <Layout className="pt-16">
       <LayoutColumn>
@@ -68,5 +70,7 @@ export default () => {
         <CarouselSwiper items={media} hiddenClasses="block md:hidden" slidesPerGroup={2} slidesPerView={2} />
       </LayoutColumn>
     </Layout>
-  )
-}
+  );
+};
+
+export default InstagramCarousel;
