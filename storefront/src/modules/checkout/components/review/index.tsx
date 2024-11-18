@@ -32,7 +32,7 @@ const Review = ({ cart }: { cart: any }) => {
               isOpen && "font-semibold"
             )}
           >
-            5. Review
+            3. Revisión
           </p>
         </div>
         {!isOpen &&

@@ -29,15 +29,15 @@ export default async function CheckoutForm({
     return null
   }
 
-  // const activeSession = cart.payment_collection?.payment_sessions?.find(
-  //   (paymentSession: any) => paymentSession.status === "pending"
-  // )
+  const activeSession = cart.payment_collection?.payment_sessions?.find(
+    (paymentSession: any) => paymentSession.status === "pending"
+  )
 
-  // const selectedPaymentMethod = activeSession?.provider_id ?? "pp_system_default"
+  const selectedPaymentMethod = activeSession?.provider_id ?? "pp_system_default"
 
-  // if (!activeSession) {
-  //   await initiatePaymentSession(selectedPaymentMethod)
-  // }
+  if (!activeSession) {
+    await initiatePaymentSession(selectedPaymentMethod)
+  }
 
   return (
     <>
