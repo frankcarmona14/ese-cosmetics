@@ -6,6 +6,7 @@ import { Input } from "@/components/Forms"
 import { Checkbox } from "@/components/Checkbox"
 // import AddressSelect from "../address-select"
 import CountrySelect from "../country-select"
+import { initiatePaymentSession } from "@lib/data/cart"
 
 const ShippingAddress = ({
   customer,
@@ -54,14 +55,24 @@ const ShippingAddress = ({
     // Ensure cart is not null and has a shipping_address before setting form data
     if (cart && cart.shipping_address) {
       setFormAddress(cart?.shipping_address)
+
+      const activeSession = cart.payment_collection?.payment_sessions?.find(
+        (paymentSession: any) => paymentSession.status === "pending"
+      )
+
+      const selectedPaymentMethod = activeSession?.provider_id ?? "pp_system_default"
+
+      if (!activeSession) {
+        initiatePaymentSession(selectedPaymentMethod)
+      }
     }
   }, [cart])
 
   const handleChange = async (
     e:
       | React.ChangeEvent<
-          HTMLInputElement | HTMLInputElement | HTMLSelectElement
-        >
+        HTMLInputElement | HTMLInputElement | HTMLSelectElement
+      >
       | { target: { name: string; value: string } }
   ) => {
     setFormData({

@@ -36,18 +36,6 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
   //   return <GiftCardPaymentButton />
   // }
 
-  const activeSession = cart.payment_collection?.payment_sessions?.find(
-    (paymentSession: any) => paymentSession.status === "pending"
-  )
-
-  const selectedPaymentMethod = activeSession?.provider_id ?? "pp_system_default"
-
-  useEffect(() => {
-    if (!activeSession) {
-      initiatePaymentSession(selectedPaymentMethod)
-    }
-  }, [activeSession])
-
   const paymentSession = cart.payment_collection?.payment_sessions?.[0]
 
   switch (true) {
