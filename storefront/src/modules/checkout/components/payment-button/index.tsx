@@ -7,7 +7,7 @@ import React, { useState } from "react"
 import { HttpTypes } from "@medusajs/types"
 
 import Spinner from "@modules/common/icons/spinner"
-import { placeOrder } from "@lib/data/cart"
+import { initiatePaymentSession, placeOrder } from "@lib/data/cart"
 import { isManual, isPaypal, isStripe } from "@lib/constants"
 import { Button } from "@/components/Button"
 import ErrorMessage from "../error-message"
@@ -17,7 +17,7 @@ type PaymentButtonProps = {
   selectPaymentMethod: () => void
 }
 
-const PaymentButton: React.FC<PaymentButtonProps> = ({
+const PaymentButton: React.FC<PaymentButtonProps> = async ({
   cart,
   selectPaymentMethod,
 }) => {
@@ -36,7 +36,17 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
   //   return <GiftCardPaymentButton />
   // }
 
-  const paymentSession = { provider_id: "pp_system_default" }
+  const activeSession = cart.payment_collection?.payment_sessions?.find(
+    (paymentSession: any) => paymentSession.status === "pending"
+  )
+
+  const selectedPaymentMethod = activeSession?.provider_id ?? "pp_system_default"
+
+  if (!activeSession) {
+    await initiatePaymentSession(selectedPaymentMethod)
+  }
+
+  const paymentSession = cart.payment_collection?.payment_sessions?.[0]
 
   switch (true) {
     case isStripe(paymentSession?.provider_id):
