@@ -17,7 +17,7 @@ type PaymentButtonProps = {
   selectPaymentMethod: () => void
 }
 
-const PaymentButton: React.FC<PaymentButtonProps> = async ({
+const PaymentButton: React.FC<PaymentButtonProps> = ({
   cart,
   selectPaymentMethod,
 }) => {
