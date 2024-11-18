@@ -5,8 +5,6 @@ import { getRegion } from "@lib/data/regions"
 import { getProductTypesList } from "@lib/data/product-types"
 import { Layout, LayoutColumn } from "@/components/Layout"
 import { LocalizedButtonLink, LocalizedLink } from "@/components/LocalizedLink"
-import { CollectionsSection } from "@/components/CollectionsSection"
-import { Button } from "@/components/Button"
 import { Carousel } from "@/components/Carousel"
 import { getCategoriesList } from "@lib/data/categories"
 import Image from "next/image"
@@ -19,9 +17,9 @@ import { FaTruck } from "react-icons/fa"
 import InstagramCarousel from "@/components/InstagramCarousel"
 
 export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
+  title: "Ese Cosmetics - Embellece tu rutina diaria",
   description:
-    "A performant frontend ecommerce starter template with Next.js 14 and Medusa.",
+    "Descubre la colección de cosméticos de Ese Cosmetics. Ofrecemos productos de alta calidad para embellecer tu rutina diaria. Compra ahora y disfruta de descuentos exclusivos y envíos rápidos.",
 }
 
 const ProductTypesSection: React.FC = async () => {
@@ -174,7 +172,7 @@ export default async function Home({
             <Suspense fallback={<SkeletonProductGrid />}>
               <PaginatedProducts
                 countryCode={countryCode}
-                collectionId={"pcol_01JBHX4XDQWYC3SQTESSR9SW7K"}
+                collectionId={process.env.NEXT_PUBLIC_BEST_SELLING_COLLECTION_ID ?? "pcol_01JCY8G61A874V08APXEACSKGR"}
                 page={1}
               />
             </Suspense>
