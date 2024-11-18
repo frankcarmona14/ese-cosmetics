@@ -3,7 +3,7 @@
 import { OnApproveActions, OnApproveData } from "@paypal/paypal-js"
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js"
 import { useElements, useStripe } from "@stripe/react-stripe-js"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { HttpTypes } from "@medusajs/types"
 
 import Spinner from "@modules/common/icons/spinner"
@@ -42,9 +42,11 @@ const PaymentButton: React.FC<PaymentButtonProps> = async ({
 
   const selectedPaymentMethod = activeSession?.provider_id ?? "pp_system_default"
 
-  if (!activeSession) {
-    await initiatePaymentSession(selectedPaymentMethod)
-  }
+  useEffect(() => {
+    if (!activeSession) {
+      initiatePaymentSession(selectedPaymentMethod)
+    }
+  }, [activeSession])
 
   const paymentSession = cart.payment_collection?.payment_sessions?.[0]
 
