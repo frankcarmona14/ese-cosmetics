@@ -19,7 +19,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "prueba-servy.lon1.cdn.digitaloceanspaces.com"
+        hostname: "esecosmetics.s3.us-east-1.amazonaws.com"
       },
       { 
         protocol: "https",
