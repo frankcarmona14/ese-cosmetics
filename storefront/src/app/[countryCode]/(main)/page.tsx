@@ -149,10 +149,10 @@ export default async function Home({
               key={category.id}
             >
               <LocalizedLink href={`/categories/${category.handle}`}>
-                {typeof category.metadata?.image === "string" && (
+                {typeof category.metadata?.imageUrl === "string" && (
                   <div className="relative rounded-md overflow-hidden shadow-lg mb-4 md:mb-6 w-full aspect-[4/5]">
                     <Image
-                      src={category.metadata.image}
+                      src={category.metadata.imageUrl}
                       alt={category.name}
                       fill
                       objectFit="cover"
