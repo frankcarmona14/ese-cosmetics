@@ -43,8 +43,8 @@ export const CollectionsSection: React.FC<{ className?: string }> = async ({
           key={collection.id}
         >
           <LocalizedLink href={`/collections/${collection.handle}`}>
-            {typeof collection.metadata?.imageUrl === "string" && 
-              collection.metadata?.imageUrl.length > 0 && (
+            {typeof collection.metadata.imageUrl === "string" && 
+              collection.metadata.imageUrl.length > 0 && (
                 <div className="relative mb-4 md:mb-10 w-full aspect-[3/4]">
                   <Image
                     src={collection.metadata.imageUrl}
@@ -54,8 +54,8 @@ export const CollectionsSection: React.FC<{ className?: string }> = async ({
                 </div>
               )}
             <h3 className="md:text-lg mb-2 md:mb-4">{collection.title}</h3>
-            {typeof collection.metadata?.description === "string" &&
-              collection.metadata?.description.length > 0 && (
+            {typeof collection.metadata.description === "string" &&
+              collection.metadata.description.length > 0 && (
                 <p className="text-xs text-grayscale-500 md:text-md">
                   {collection.metadata.description}
                 </p>
