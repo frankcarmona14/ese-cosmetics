@@ -39,7 +39,7 @@ export function InnerHeader({ regions }: { regions: HttpTypes.StoreRegion[] }) {
   const handleScroll = (elementsToChangeColor: NodeListOf<Element>) => {
     const position = window.scrollY
 
-    position > 200
+    position > 180
       ? elementsToChangeColor.forEach((element) => {
         element.setAttribute("data-changecolor", "true")
       })
